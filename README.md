@@ -1,6 +1,6 @@
-# Laravel Lang Translators
+# Laravel Lang Translator
 
-![laravel lang translators](https://preview.dragon-code.pro/laravel-lang/translators.svg?brand=laravel&preposition=for)
+![laravel lang translator](https://preview.dragon-code.pro/laravel-lang/translator.svg?brand=laravel&preposition=for)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
@@ -9,7 +9,7 @@
 
 ## Documentation
 
-See the [documentation](https://laravel-lang.com/packages-translators.html) for detailed installation.
+See the [documentation](https://laravel-lang.com/packages-translator.html) for detailed installation.
 
 ## Communication
 
@@ -28,14 +28,14 @@ Please see [CONTRIBUTING](https://laravel-lang.com/contributions.html) for detai
 This package is licensed under the [MIT License](https://laravel-lang.com/license.html).
 
 
-[badge_build]:          https://img.shields.io/github/actions/workflow/status/laravel-lang/translators/tests.yml?branch=main&style=flat-square
+[badge_build]:          https://img.shields.io/github/actions/workflow/status/laravel-lang/translator/tests.yml?branch=main&style=flat-square
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/laravel-lang/translators.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/laravel-lang/translator.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/laravel-lang/translators.svg?style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/laravel-lang/translator.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/laravel-lang/translators?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/laravel-lang/translator?label=stable&style=flat-square
 
-[link_build]:           https://github.com/laravel-lang/translators/actions
+[link_build]:           https://github.com/laravel-lang/translator/actions
 
-[link_packagist]:       https://packagist.org/packages/laravel-lang/translators
+[link_packagist]:       https://packagist.org/packages/laravel-lang/translator
