@@ -18,7 +18,7 @@ class Yandex extends Integration
         protected YandexCloud $translator,
     ) {}
 
-    protected function translate(iterable|string $text, string|Locale $to, string|Locale|null $from): Collection
+    protected function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
         return collect($this->translator->translate($text, $this->lang($to), $this->lang($from)));
     }
