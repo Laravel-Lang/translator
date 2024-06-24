@@ -2,21 +2,19 @@
 
 declare(strict_types=1);
 
-namespace LaravelLang\Translator\Providers;
+namespace LaravelLang\Translator;
 
 use DeepL\Translator;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use LaravelLang\Translator\Integrations\Deepl;
 use LaravelLang\Translator\Integrations\GoogleFree;
 use LaravelLang\Translator\Integrations\Yandex;
 use LaravelLang\Translator\Requests\YandexCloud;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
-class TranslatorServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
-    public function register(): void {}
-
     public function boot(): void
     {
         $this->app->singleton(Deepl::class, function (Application $app) {

@@ -6,20 +6,31 @@
     "authors": [
         {
             "name": "Andrey Helldar",
-            "email": "helldar@dragon-code.pro"
+            "email": "helldar@dragon-code.pro",
+            "homepage": "https://dragon-code.pro"
+        },
+        {
+            "name": "Laravel-Lang Team",
+            "homepage": "https://github.com/Laravel-Lang"
         }
     ],
+    "support": {
+        "issues": "https://github.com/Laravel-Lang/translator/issues",
+        "source": "https://github.com/Laravel-Lang/translator"
+    },
     "require": {
+        "php": "^8.2",
         "deeplcom/deepl-php": "^1.7",
-        "stichoza/google-translate-php": "^5.1",
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/support": "^10.0 || ^11.0",
         "laravel-lang/locale-list": "^1.4",
-        "guzzlehttp/guzzle": "^7.8"
+        "stichoza/google-translate-php": "^5.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^9.1",
         "pestphp/pest": "^2.34",
-        "symfony/var-dumper": "^7.1"
+        "symfony/var-dumper": "^6.0 || ^7.0"
     },
     "minimum-stability": "stable",
     "autoload": {
@@ -27,10 +38,31 @@
             "LaravelLang\\Translator\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "config": {
         "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dragon-code/codestyler": true,
+            "ergebnis/composer-normalize": true,
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "symfony/thanks": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelLang\\Translator\\ServiceProvider"
+            ]
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest --parallel"
     }
 }

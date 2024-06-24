@@ -1,12 +1,16 @@
 .idea/
 vendor/
 
-.env
 .cache
+.DS_Store
+.env
+.php_cs.cache
+.phpintel
 .temp
 
 *.bak
 *.cache
 *.clover
 *.orig
-*.lock
+
+composer.lock
