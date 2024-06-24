@@ -1,0 +1,12 @@
+.idea/
+vendor/
+
+.env
+.cache
+.temp
+
+*.bak
+*.cache
+*.clover
+*.orig
+*.lock
