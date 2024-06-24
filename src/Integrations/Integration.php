@@ -18,7 +18,7 @@ abstract class Integration implements Translator
         Locale|string|null $from
     ): Collection;
 
-    public function can(string|Locale $to): bool
+    public function can(Locale|string $to): bool
     {
         return $this->lang($to) !== null;
     }

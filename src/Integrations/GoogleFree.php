@@ -17,17 +17,17 @@ class GoogleFree extends Integration
     public function __construct(
         protected GoogleTranslate $translator,
         protected array $options,
-        protected string|bool $preserve
+        protected bool|string $preserve
     ) {}
 
-    protected function translate(iterable|string $text, string|Locale $to, string|Locale|null $from): Collection
+    protected function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
         return collect($text)->map(
             fn (string $value) => $this->translator($to, $from)->translate($value)
         );
     }
 
-    protected function translator(string|Locale $to, string|Locale|null $from): GoogleTranslate
+    protected function translator(Locale|string $to, Locale|string|null $from): GoogleTranslate
     {
         return $this->translator
             ->preserveParameters($this->preserve)
