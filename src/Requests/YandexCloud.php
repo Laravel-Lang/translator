@@ -19,7 +19,7 @@ class YandexCloud
         protected string $folderId,
     ) {}
 
-    public function translate(iterable|string $text, string|Locale $to, string|Locale|null $from): array
+    public function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): array
     {
         return $this->request($this->resolveText($text), $to, $from);
     }
