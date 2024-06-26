@@ -10,13 +10,15 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class Google extends Integration
 {
+    public static string $integration = GoogleTranslate::class;
+
     protected array $map = [
         Locale::French->value => 'fr',
     ];
 
     public function __construct(
         protected GoogleTranslate $translator,
-        protected string|true $regex = true
+        protected string|bool $regex = true
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
@@ -30,7 +32,7 @@ class Google extends Integration
     {
         return $this->translator
             ->preserveParameters($this->regex)
-            ->setSource($this->lang($from))
-            ->setTarget($this->lang($to));
+            ->setSource($this->locale($from))
+            ->setTarget($this->locale($to));
     }
 }

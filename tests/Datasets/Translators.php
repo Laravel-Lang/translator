@@ -7,7 +7,7 @@ use LaravelLang\Translator\Integrations\Google;
 use LaravelLang\Translator\Integrations\Yandex;
 
 dataset('translators', fn () => [
-    Deepl::class  => [Deepl::class],
-    Google::class => [Google::class],
-    Yandex::class => [Yandex::class],
+    class_basename(Deepl::class)  => [Deepl::class],
+    class_basename(Google::class) => [Google::class],
+    class_basename(Yandex::class) => [Yandex::class],
 ]);

@@ -10,6 +10,8 @@ use LaravelLang\Translator\Requests\YandexCloud;
 
 class Yandex extends Integration
 {
+    public static string $integration = YandexCloud::class;
+
     protected array $map = [
         Locale::French->value => 'fr',
     ];
@@ -20,6 +22,6 @@ class Yandex extends Integration
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
-        return collect($this->translator->translate($text, $this->lang($to), $this->lang($from)));
+        return collect($this->translator->translate($text, $this->locale($to), $this->locale($from)));
     }
 }

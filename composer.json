@@ -23,6 +23,7 @@
         "deeplcom/deepl-php": "^1.7",
         "guzzlehttp/guzzle": "^7.8",
         "illuminate/support": "^10.0 || ^11.0",
+        "laravel-lang/config": "^1.0@dev",
         "laravel-lang/locale-list": "^1.4",
         "stichoza/google-translate-php": "^5.1"
     },

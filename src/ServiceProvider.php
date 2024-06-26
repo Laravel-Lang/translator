@@ -4,39 +4,32 @@ declare(strict_types=1);
 
 namespace LaravelLang\Translator;
 
-use DeepL\Translator;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use LaravelLang\Translator\Integrations\Deepl;
-use LaravelLang\Translator\Integrations\Google;
-use LaravelLang\Translator\Integrations\Yandex;
-use LaravelLang\Translator\Requests\YandexCloud;
-use Stichoza\GoogleTranslate\GoogleTranslate;
+use LaravelLang\Config\Data\Shared\TranslatorData;
+use LaravelLang\Config\Facades\Config;
+use LaravelLang\Translator\Contracts\Translator;
 
 class ServiceProvider extends BaseServiceProvider
 {
     public function boot(): void
     {
-        $this->app->singleton(Deepl::class, function (Application $app) {
-            return new Deepl(
-                translator: new Translator($app['config']->get('services.deepl.key')),
-            );
-        });
+        foreach ($this->translators() as $config) {
+            $this->bootTranslator($config->translator, $config->credentials);
+        }
+    }
 
-        $this->app->singleton(Google::class, function (Application $app) {
-            return new Google(
-                translator: new GoogleTranslate(),
-                regex     : $app['config']->get('services.google_translate.regex_parameters') ?: true,
-            );
-        });
+    protected function bootTranslator(Translator|string $translator, array $credentials): void
+    {
+        $this->app->singleton($translator, fn () => new $translator(
+            new $translator::$integration(...$credentials)
+        ));
+    }
 
-        $this->app->singleton(Yandex::class, function (Application $app) {
-            return new Yandex(
-                new YandexCloud(
-                    key     : $app['config']->get('services.yandex_translate.key'),
-                    folderId: $app['config']->get('services.yandex_translate.folder_id'),
-                )
-            );
-        });
+    /**
+     * @return array<TranslatorData>
+     */
+    protected function translators(): array
+    {
+        return Config::shared()->translators->enabled;
     }
 }

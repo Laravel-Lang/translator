@@ -14,5 +14,5 @@ test('can be translatable', function (string $translator) {
 test('cannot be translatable', function (string $translator) {
     $translator = translator($translator);
 
-    expect($translator->can('qwerty'))->toBeTrue();
+    expect($translator->can('qwerty'))->toBeFalse();
 })->with('translators');

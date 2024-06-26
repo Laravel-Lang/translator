@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace LaravelLang\Translator\Services;
 
+use LaravelLang\Config\Data\Shared\TranslatorData;
+use LaravelLang\Config\Facades\Config;
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Contracts\Translator;
 use LaravelLang\Translator\Integrations\Deepl;
@@ -14,8 +16,8 @@ class Translate
 {
     public function text(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
     {
-        foreach ($this->translators() as $class) {
-            if ($translated = $this->translate($class, $text, $to, $from)) {
+        foreach ($this->translators() as $service) {
+            if ($translated = $this->translate($service->translator, $text, $to, $from)) {
                 return $translated;
             }
         }
@@ -65,9 +67,12 @@ class Translate
         return null;
     }
 
+    /**
+     * @return array<TranslatorData>
+     */
     protected function translators(): array
     {
-        return config('localization.translators');
+        return Config::shared()->translators->enabled;
     }
 
     protected function initialize(string $class): Translator

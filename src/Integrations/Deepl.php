@@ -10,6 +10,8 @@ use LaravelLang\LocaleList\Locale;
 
 class Deepl extends Integration
 {
+    public static string $integration = DeeplTranslator::class;
+
     protected array $map = [
         Locale::French->value => 'fr',
     ];
@@ -20,6 +22,6 @@ class Deepl extends Integration
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
-        return collect($this->translator->translateText($text, $this->lang($from), $this->lang($to)));
+        return collect($this->translator->translateText($text, $this->locale($from), $this->locale($to)));
     }
 }

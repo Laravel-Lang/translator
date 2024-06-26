@@ -10,6 +10,8 @@ use LaravelLang\Translator\Contracts\Translator;
 
 abstract class Integration implements Translator
 {
+    public static string $integration;
+
     protected array $map = [];
 
     abstract protected function request(
@@ -20,35 +22,44 @@ abstract class Integration implements Translator
 
     public function can(Locale|string $to): bool
     {
-        return $this->lang($to) !== null;
+        return $this->locale($to) !== null;
     }
 
     public function translate(
-        array|string $text,
-        Locale|string $to,
+        iterable|string $text,
+        Locale|string|null $to,
         Locale|string|null $from = null
     ): array|string {
-        return is_array($text)
+        if ($this->invalidLocale($to)) {
+            return is_string($text) ? $text : collect($text)->all();
+        }
+
+        return is_iterable($text)
             ? $this->request($text, $to, $from)->all()
             : $this->request($text, $to, $from)->first();
     }
 
-    protected function lang(Locale|string|null $lang): ?string
+    protected function locale(Locale|string|null $locale): ?string
     {
-        $lang = $lang?->value ?? $lang;
+        $locale = $locale?->value ?? $locale;
 
-        if (empty($lang)) {
+        if (empty($locale)) {
             return null;
         }
 
-        if ($value = $this->map[$lang] ?? false) {
+        if ($value = $this->map[$locale] ?? false) {
             return $value;
         }
 
-        if (in_array($lang, $this->map, true)) {
-            return $lang;
+        if (in_array($locale, $this->map, true)) {
+            return $locale;
         }
 
         return null;
+    }
+
+    protected function invalidLocale(Locale|string|null $locale): bool
+    {
+        return ! $this->locale($locale);
     }
 }
