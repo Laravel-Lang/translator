@@ -18,7 +18,7 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function bootTranslator(Translator|string $translator, array $credentials): void
+    protected function bootTranslator(string|Translator $translator, array $credentials): void
     {
         $this->app->singleton($translator, fn () => new $translator(
             new $translator::$integration(...$credentials)

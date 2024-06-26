@@ -10,9 +10,9 @@ use LaravelLang\Translator\Contracts\Translator;
 
 abstract class Integration implements Translator
 {
-    public static string $integration;
-
     protected array $map = [];
+
+    public static string $integration;
 
     abstract protected function request(
         iterable|string $text,

@@ -11,7 +11,7 @@ use LaravelLang\Translator\Requests\YandexCloud as YandexTranslate;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Tests\Constants\Value;
 
-function mockTranslators(array|string $text = null): void
+function mockTranslators(array|string|null $text = null): void
 {
     mockDeeplTranslator($text);
     mockGoogleTranslator($text);

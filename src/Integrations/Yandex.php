@@ -10,11 +10,11 @@ use LaravelLang\Translator\Requests\YandexCloud;
 
 class Yandex extends Integration
 {
-    public static string $integration = YandexCloud::class;
-
     protected array $map = [
         Locale::French->value => 'fr',
     ];
+
+    public static string $integration = YandexCloud::class;
 
     public function __construct(
         protected YandexCloud $translator,
