@@ -15,12 +15,11 @@ class Deepl extends Integration
     ];
 
     public function __construct(
-        protected DeeplTranslator $translator,
-        protected array $options
+        protected DeeplTranslator $translator
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
-        return collect($this->translator->translateText($text, $this->lang($from), $this->lang($to), $this->options));
+        return collect($this->translator->translateText($text, $this->lang($from), $this->lang($to)));
     }
 }

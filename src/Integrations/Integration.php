@@ -29,8 +29,8 @@ abstract class Integration implements Translator
         Locale|string|null $from = null
     ): array|string {
         return is_array($text)
-            ? $this->request($text, $to, $from)->pluck('text')->all()
-            : $this->request($text, $to, $from)->pluck('text')->first();
+            ? $this->request($text, $to, $from)->all()
+            : $this->request($text, $to, $from)->first();
     }
 
     protected function lang(Locale|string|null $lang): ?string

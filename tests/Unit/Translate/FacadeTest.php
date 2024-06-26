@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Facades\Translate;
-use Tests\Concerns\Value;
+use Tests\Constants\Value;
 
 test('translate', function () {
     expect(Translate::text(Value::Text1English, Locale::French))->toBe(

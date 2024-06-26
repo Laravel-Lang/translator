@@ -7,7 +7,7 @@ namespace LaravelLang\Translator\Services;
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Contracts\Translator;
 use LaravelLang\Translator\Integrations\Deepl;
-use LaravelLang\Translator\Integrations\GoogleFree;
+use LaravelLang\Translator\Integrations\Google;
 use LaravelLang\Translator\Integrations\Yandex;
 
 class Translate
@@ -33,7 +33,7 @@ class Translate
         Locale|string $to,
         Locale|string|null $from = null
     ): array|string {
-        return $this->via(GoogleFree::class, $text, $to, $from);
+        return $this->via(Google::class, $text, $to, $from);
     }
 
     public function viaYandex(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string

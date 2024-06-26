@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use LaravelLang\LocaleList\Locale;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 
-class GoogleFree extends Integration
+class Google extends Integration
 {
     protected array $map = [
         Locale::French->value => 'fr',
@@ -16,8 +16,7 @@ class GoogleFree extends Integration
 
     public function __construct(
         protected GoogleTranslate $translator,
-        protected array $options = [],
-        protected bool|string $preserve = true
+        protected string|true $regex = true
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
@@ -30,9 +29,8 @@ class GoogleFree extends Integration
     protected function translator(Locale|string $to, Locale|string|null $from): GoogleTranslate
     {
         return $this->translator
-            ->preserveParameters($this->preserve)
+            ->preserveParameters($this->regex)
             ->setSource($this->lang($from))
-            ->setTarget($this->lang($to))
-            ->setOptions($this->options);
+            ->setTarget($this->lang($to));
     }
 }

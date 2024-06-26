@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use LaravelLang\LocaleList\Locale;
-use Tests\Concerns\Value;
+use Tests\Constants\Value;
 
 test('as string', function (string $translator) {
     $translator = translator($translator);
