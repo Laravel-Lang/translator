@@ -12,7 +12,7 @@ use LaravelLang\Translator\Integrations\Yandex;
 
 class Translate
 {
-    public function text(iterable|string $text, Locale|string $to, Locale|string|null $from): array|string
+    public function text(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
     {
         foreach ($this->translators() as $class) {
             if ($translated = $this->translate($class, $text, $to, $from)) {
@@ -23,17 +23,20 @@ class Translate
         return $text;
     }
 
-    public function viaDeepl(iterable|string $text, Locale|string $to, Locale|string|null $from): array|string
+    public function viaDeepl(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
     {
         return $this->via(Deepl::class, $text, $to, $from);
     }
 
-    public function viaGoogleFree(iterable|string $text, Locale|string $to, Locale|string|null $from): array|string
-    {
+    public function viaGoogleFree(
+        iterable|string $text,
+        Locale|string $to,
+        Locale|string|null $from = null
+    ): array|string {
         return $this->via(GoogleFree::class, $text, $to, $from);
     }
 
-    public function viaYandex(iterable|string $text, Locale|string $to, Locale|string|null $from): array|string
+    public function viaYandex(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
     {
         return $this->via(Yandex::class, $text, $to, $from);
     }
@@ -56,7 +59,7 @@ class Translate
         $translator = $this->initialize($translator);
 
         if ($translator->can($to)) {
-            return $translator->text($text, $to, $from);
+            return $translator->translate($text, $to, $from);
         }
 
         return null;

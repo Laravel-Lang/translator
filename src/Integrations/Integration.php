@@ -12,7 +12,7 @@ abstract class Integration implements Translator
 {
     protected array $map = [];
 
-    abstract protected function translate(
+    abstract protected function request(
         iterable|string $text,
         Locale|string $to,
         Locale|string|null $from
@@ -23,14 +23,14 @@ abstract class Integration implements Translator
         return $this->lang($to) !== null;
     }
 
-    public function text(
+    public function translate(
         array|string $text,
         Locale|string $to,
         Locale|string|null $from = null
     ): array|string {
         return is_array($text)
-            ? $this->translate($text, $to, $from)->pluck('text')->all()
-            : $this->translate($text, $to, $from)->pluck('text')->first();
+            ? $this->request($text, $to, $from)->pluck('text')->all()
+            : $this->request($text, $to, $from)->pluck('text')->first();
     }
 
     protected function lang(Locale|string|null $lang): ?string

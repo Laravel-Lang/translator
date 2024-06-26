@@ -19,7 +19,7 @@ class Deepl extends Integration
         protected array $options
     ) {}
 
-    protected function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
+    protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
         return collect($this->translator->translateText($text, $this->lang($from), $this->lang($to), $this->options));
     }
