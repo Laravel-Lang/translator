@@ -142,7 +142,6 @@ class Google extends Integration
 
     public function __construct(
         protected GoogleTranslate $translator,
-        protected bool|string $preserveParameters = true
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
@@ -155,7 +154,6 @@ class Google extends Integration
     protected function translator(Locale|string $to, Locale|string|null $from): GoogleTranslate
     {
         return $this->translator
-            ->preserveParameters($this->preserveParameters)
             ->setSource($this->locale($from))
             ->setTarget($this->locale($to));
     }

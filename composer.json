@@ -21,6 +21,7 @@
     "require": {
         "php": "^8.2",
         "deeplcom/deepl-php": "^1.7",
+        "dragon-code/support": "^6.13",
         "guzzlehttp/guzzle": "^7.8",
         "illuminate/config": "^10.0 || ^11.0",
         "illuminate/support": "^10.0 || ^11.0",

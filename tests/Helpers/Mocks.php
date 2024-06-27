@@ -28,7 +28,7 @@ function mockGoogleTranslator(array|string|null $text = null): void
 {
     $mock = mock(Google::$integration);
 
-    $mock->shouldReceive('preserveParameters', 'setSource', 'setTarget')->andReturnSelf();
+    $mock->shouldReceive('setSource', 'setTarget')->andReturnSelf();
 
     is_array($text)
         ? $mock->shouldReceive('translate')->andReturn(...$text)

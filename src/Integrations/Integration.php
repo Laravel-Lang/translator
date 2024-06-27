@@ -6,10 +6,13 @@ namespace LaravelLang\Translator\Integrations;
 
 use Illuminate\Support\Collection;
 use LaravelLang\LocaleList\Locale;
+use LaravelLang\Translator\Concerns\Extractable;
 use LaravelLang\Translator\Contracts\Translator;
 
 abstract class Integration implements Translator
 {
+    use Extractable;
+
     protected array $map = [];
 
     public static string $integration;
@@ -35,8 +38,8 @@ abstract class Integration implements Translator
         }
 
         return is_iterable($text)
-            ? $this->request($text, $to, $from)->all()
-            : $this->request($text, $to, $from)->first();
+            ? $this->injectParameters($text, $this->request($this->extractParameters($text), $to, $from)->all())
+            : $this->injectParameters($text, $this->request($this->extractParameters($text), $to, $from)->first());
     }
 
     protected function locale(Locale|string|null $locale): ?string
