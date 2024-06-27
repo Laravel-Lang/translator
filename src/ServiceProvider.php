@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LaravelLang\Translator;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use LaravelLang\Config\Data\Shared\TranslatorData;
+use LaravelLang\Config\Data\Shared\Translators\TranslatorData;
 use LaravelLang\Config\Facades\Config;
 use LaravelLang\Translator\Contracts\Translator;
 
@@ -30,6 +30,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function translators(): array
     {
-        return Config::shared()->translators->enabled;
+        return Config::shared()->translators->channels->all;
     }
 }

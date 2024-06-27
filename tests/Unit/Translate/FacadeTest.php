@@ -24,8 +24,8 @@ test('via deepl', function () {
     );
 });
 
-test('via google free', function () {
-    expect(Translate::viaGoogleFree(Value::Text1English, Locale::French))->toBe(
+test('via google', function () {
+    expect(Translate::viaGoogle(Value::Text1English, Locale::French))->toBe(
         Value::Text1French
     );
 });

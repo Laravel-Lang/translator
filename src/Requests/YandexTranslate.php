@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use LaravelLang\LocaleList\Locale;
 
-class YandexCloud
+class YandexTranslate
 {
     protected string $url = 'https://translate.api.cloud.yandex.net/translate/v2/translate';
 
@@ -16,7 +16,7 @@ class YandexCloud
 
     public function __construct(
         protected string $key,
-        protected string $folderId,
+        protected string $folder,
     ) {}
 
     public function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): array
@@ -38,7 +38,7 @@ class YandexCloud
     protected function body(array $texts, ?string $to, ?string $from): array
     {
         return collect([
-            'folderId' => $this->folderId,
+            'folderId' => $this->folder,
             'format'   => $this->format,
             'texts'    => $texts,
 

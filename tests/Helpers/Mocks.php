@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-use DeepL\Translator as DeeplTranslate;
 use Illuminate\Support\Arr;
 use LaravelLang\Translator\Integrations\Deepl;
 use LaravelLang\Translator\Integrations\Google;
 use LaravelLang\Translator\Integrations\Yandex;
-use LaravelLang\Translator\Requests\YandexCloud as YandexTranslate;
-use Stichoza\GoogleTranslate\GoogleTranslate;
 use Tests\Constants\Value;
 
 function mockTranslators(array|string|null $text = null): void
@@ -20,7 +17,7 @@ function mockTranslators(array|string|null $text = null): void
 
 function mockDeeplTranslator(array|string|null $text = null): void
 {
-    $mock = mock(DeeplTranslate::class);
+    $mock = mock(Deepl::$integration);
 
     $mock->shouldReceive('translateText')->andReturn($text ?? Value::Text1French);
 
@@ -29,7 +26,7 @@ function mockDeeplTranslator(array|string|null $text = null): void
 
 function mockGoogleTranslator(array|string|null $text = null): void
 {
-    $mock = mock(GoogleTranslate::class);
+    $mock = mock(Google::$integration);
 
     $mock->shouldReceive('preserveParameters', 'setSource', 'setTarget')->andReturnSelf();
 
@@ -42,7 +39,7 @@ function mockGoogleTranslator(array|string|null $text = null): void
 
 function mockYandexTranslator(array|string|null $text = null): void
 {
-    $mock = mock(YandexTranslate::class);
+    $mock = mock(Yandex::$integration);
 
     $mock->shouldReceive('translate')->andReturn(
         Arr::wrap($text ?? [Value::Text1French])

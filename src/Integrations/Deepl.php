@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LaravelLang\Translator\Integrations;
 
-use DeepL\Translator as DeeplTranslator;
 use Illuminate\Support\Collection;
 use LaravelLang\LocaleList\Locale;
+use LaravelLang\Translator\Requests\DeeplTranslate;
 
 class Deepl extends Integration
 {
@@ -96,10 +96,10 @@ class Deepl extends Integration
         // Locale::Welsh->value             => 'cy',
     ];
 
-    public static string $integration = DeeplTranslator::class;
+    public static string $integration = DeeplTranslate::class;
 
     public function __construct(
-        protected DeeplTranslator $translator
+        protected DeeplTranslate $translator
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection

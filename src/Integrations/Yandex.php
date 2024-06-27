@@ -6,7 +6,7 @@ namespace LaravelLang\Translator\Integrations;
 
 use Illuminate\Support\Collection;
 use LaravelLang\LocaleList\Locale;
-use LaravelLang\Translator\Requests\YandexCloud;
+use LaravelLang\Translator\Requests\YandexTranslate;
 
 class Yandex extends Integration
 {
@@ -14,10 +14,10 @@ class Yandex extends Integration
         Locale::French->value => 'fr',
     ];
 
-    public static string $integration = YandexCloud::class;
+    public static string $integration = YandexTranslate::class;
 
     public function __construct(
-        protected YandexCloud $translator,
+        protected YandexTranslate $translator,
     ) {}
 
     protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection

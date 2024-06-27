@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaravelLang\Translator\Services;
 
-use LaravelLang\Config\Data\Shared\TranslatorData;
+use LaravelLang\Config\Data\Shared\Translators\TranslatorData;
 use LaravelLang\Config\Facades\Config;
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Contracts\Translator;
@@ -30,11 +30,8 @@ class Translate
         return $this->via(Deepl::class, $text, $to, $from);
     }
 
-    public function viaGoogleFree(
-        iterable|string $text,
-        Locale|string $to,
-        Locale|string|null $from = null
-    ): array|string {
+    public function viaGoogle(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
+    {
         return $this->via(Google::class, $text, $to, $from);
     }
 
@@ -72,11 +69,11 @@ class Translate
      */
     protected function translators(): array
     {
-        return Config::shared()->translators->enabled;
+        return Config::shared()->translators->channels->enabled;
     }
 
     protected function initialize(string $class): Translator
     {
-        return app($class);
+        return app(ltrim($class, '\\'));
     }
 }
