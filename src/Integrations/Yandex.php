@@ -22,6 +22,8 @@ class Yandex extends Integration
 
     protected function request(array|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
-        return collect($this->translator->translate($text, $this->locale($to), $this->locale($from)));
+        return collect($this->translator->translate($text, $this->locale($to), $this->locale($from)))->map(
+            fn (array $item) => $item['text']
+        );
     }
 }

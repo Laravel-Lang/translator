@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use DeepL\TextResult;
 use Illuminate\Support\Arr;
+use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Integrations\Deepl;
 use LaravelLang\Translator\Integrations\Google;
 use LaravelLang\Translator\Integrations\Yandex;
@@ -48,9 +49,12 @@ function mockYandexTranslator(array|string|null $text = null): void
 {
     $mock = mock(Yandex::$integration);
 
-    $mock->shouldReceive('translate')->andReturn(
-        Arr::wrap($text ?? [Value::Text1French])
-    );
+    $values = Arr::wrap($text ?? [Value::Text1French]);
+
+    $mock->shouldReceive('translate')->andReturn(array_map(fn (string $text) => [
+        'text'                 => $text,
+        'detectedLanguageCode' => Locale::French->value,
+    ], $values));
 
     mockTranslator(Yandex::class, $mock);
 }
