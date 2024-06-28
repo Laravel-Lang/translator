@@ -11,8 +11,8 @@ interface Translator
     public function can(Locale|string $to): bool;
 
     public function translate(
-        iterable|string|int|float|bool|null $text,
+        bool|float|int|iterable|string|null $text,
         Locale|string|null $to,
         Locale|string|null $from = null
-    ): array|string|int|float|bool|null;
+    ): array|bool|float|int|string|null;
 }

@@ -13,9 +13,9 @@ abstract class Integration implements Translator
 {
     use Extractable;
 
-    public static string $integration;
-
     protected array $map = [];
+
+    public static string $integration;
 
     abstract protected function request(
         array|string $text,
@@ -29,10 +29,10 @@ abstract class Integration implements Translator
     }
 
     public function translate(
-        iterable|string|int|float|bool|null $text,
+        bool|float|int|iterable|string|null $text,
         Locale|string|null $to,
         Locale|string|null $from = null
-    ): array|string|int|float|bool|null {
+    ): array|bool|float|int|string|null {
         if (! is_iterable($text) && ! is_string($text)) {
             return $text;
         }
