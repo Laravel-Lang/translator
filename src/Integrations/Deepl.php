@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace LaravelLang\Translator\Integrations;
 
 use DeepL\LanguageCode;
+use DeepL\TextResult;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Requests\DeeplTranslate;
@@ -108,6 +110,8 @@ class Deepl extends Integration
     {
         $translated = $this->translator->translateText($text, $this->locale($from), $this->locale($to));
 
-        return is_array($text) ? collect($translated)->pluck('text') : collect($translated->text);
+        return collect(Arr::wrap($translated))->map(
+            fn (TextResult $result) => $result->text
+        );
     }
 }
