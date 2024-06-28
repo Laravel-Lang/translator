@@ -10,29 +10,29 @@ use LaravelLang\Translator\Integrations\Google;
 use LaravelLang\Translator\Integrations\Yandex;
 use Tests\Constants\Value;
 
-function mockTranslators(array|string|int|float|null $text = null): void
+function mockTranslators(array|float|int|string|null $text = null): void
 {
     mockDeeplTranslator($text);
     mockGoogleTranslator($text);
     mockYandexTranslator($text);
 }
 
-function mockDeeplTranslator(array|string|int|float|null $text = null): void
+function mockDeeplTranslator(array|float|int|string|null $text = null): void
 {
     $mock = mock(Deepl::$integration);
 
     $text ??= Value::Text1French;
 
-    $result = fn (string|int|float|null $text) => new TextResult((string) $text, 'fr');
+    $result = fn (float|int|string|null $text) => new TextResult((string) $text, 'fr');
 
-    $values = is_array($text) ? array_map(fn (string|int|float|null $value) => $result($value), $text) : $result($text);
+    $values = is_array($text) ? array_map(fn (float|int|string|null $value) => $result($value), $text) : $result($text);
 
     $mock->shouldReceive('translateText')->andReturn($values);
 
     mockTranslator(Deepl::class, $mock);
 }
 
-function mockGoogleTranslator(array|string|int|float|null $text = null): void
+function mockGoogleTranslator(array|float|int|string|null $text = null): void
 {
     $mock = mock(Google::$integration);
 
@@ -45,7 +45,7 @@ function mockGoogleTranslator(array|string|int|float|null $text = null): void
     mockTranslator(Google::class, $mock);
 }
 
-function mockYandexTranslator(array|string|int|float|null $text = null): void
+function mockYandexTranslator(array|float|int|string|null $text = null): void
 {
     $mock = mock(Yandex::$integration);
 

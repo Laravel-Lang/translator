@@ -19,10 +19,10 @@ use RuntimeException;
 class Translate
 {
     public function text(
-        iterable|string|int|float|bool|null $text,
+        bool|float|int|iterable|string|null $text,
         Locale|string $to,
         Locale|string|null $from = null
-    ): array|string|int|float|bool|null {
+    ): array|bool|float|int|string|null {
         foreach ($this->translators() as $service) {
             if ($translated = $this->translate($service->translator, $text, $to, $from)) {
                 return $translated;
@@ -32,7 +32,7 @@ class Translate
         return $text;
     }
 
-    public function __call(string $name, array $arguments): array|string|int|float|bool|null
+    public function __call(string $name, array $arguments): array|bool|float|int|string|null
     {
         if (Str::startsWith($name, 'via')) {
             $provider = Str::of($name)->substr(3)->lower()->toString();
@@ -45,19 +45,19 @@ class Translate
 
     protected function via(
         string $translator,
-        iterable|string|int|float|bool|null $text,
+        bool|float|int|iterable|string|null $text,
         Locale|string $to,
         Locale|string|null $from = null
-    ): array|string|int|float|bool|null {
+    ): array|bool|float|int|string|null {
         return $this->translate($translator, $text, $to, $from) ?: $text;
     }
 
     protected function translate(
         string $translator,
-        iterable|string|int|float|bool|null $text,
+        bool|float|int|iterable|string|null $text,
         Locale|string $to,
         Locale|string|null $from = null
-    ): array|string|int|float|bool|null {
+    ): array|bool|float|int|string|null {
         $translator = $this->initialize($translator);
 
         if ($translator->can($to)) {
