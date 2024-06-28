@@ -18,7 +18,7 @@ abstract class Integration implements Translator
     public static string $integration;
 
     abstract protected function request(
-        iterable|string $text,
+        array|string $text,
         Locale|string $to,
         Locale|string|null $from
     ): Collection;

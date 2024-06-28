@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use DeepL\TextResult;
 use Illuminate\Support\Arr;
 use LaravelLang\Translator\Integrations\Deepl;
 use LaravelLang\Translator\Integrations\Google;
@@ -19,7 +20,13 @@ function mockDeeplTranslator(array|string|null $text = null): void
 {
     $mock = mock(Deepl::$integration);
 
-    $mock->shouldReceive('translateText')->andReturn($text ?? Value::Text1French);
+    $text ??= Value::Text1French;
+
+    $result = fn (?string $text) => new TextResult($text, 'fr');
+
+    $values = is_array($text) ? array_map(fn (string $value) => $result($value), $text) : $result($text);
+
+    $mock->shouldReceive('translateText')->andReturn($values);
 
     mockTranslator(Deepl::class, $mock);
 }

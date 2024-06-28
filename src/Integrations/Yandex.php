@@ -10,17 +10,17 @@ use LaravelLang\Translator\Requests\YandexTranslate;
 
 class Yandex extends Integration
 {
+    public static string $integration = YandexTranslate::class;
+
     protected array $map = [
         Locale::French->value => 'fr',
     ];
-
-    public static string $integration = YandexTranslate::class;
 
     public function __construct(
         protected YandexTranslate $translator,
     ) {}
 
-    protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
+    protected function request(array|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
         return collect($this->translator->translate($text, $this->locale($to), $this->locale($from)));
     }

@@ -144,7 +144,7 @@ class Google extends Integration
         protected GoogleTranslate $translator,
     ) {}
 
-    protected function request(iterable|string $text, Locale|string $to, Locale|string|null $from): Collection
+    protected function request(array|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
         return collect($text)->map(
             fn (string $value) => $this->translator($to, $from)->translate($value)
