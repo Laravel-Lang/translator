@@ -10,8 +10,6 @@ use LaravelLang\Translator\Requests\GoogleTranslate;
 
 class Google extends Integration
 {
-    public static string $integration = GoogleTranslate::class;
-
     /**
      * @see https://cloud.google.com/translate/docs/languages
      *
@@ -140,6 +138,8 @@ class Google extends Integration
         Locale::Yoruba->value            => 'yo',
         Locale::Zulu->value              => 'zu',
     ];
+
+    public static string $integration = GoogleTranslate::class;
 
     public function __construct(
         protected GoogleTranslate $translator,
