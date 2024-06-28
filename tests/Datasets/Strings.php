@@ -34,3 +34,12 @@ dataset('translatable-with-parameters', fn () => [
         [],
     ],
 ]);
+
+dataset('translatable-mixed-values', fn () => [
+    ['Foo', 'Foo'],
+    ['', ''],
+    [' ', ' '],
+    [123, 123],
+    [123.45, 123.45],
+    [null, null],
+]);

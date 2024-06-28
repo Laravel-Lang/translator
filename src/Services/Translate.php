@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace LaravelLang\Translator\Services;
 
+use Illuminate\Support\Str;
 use LaravelLang\Config\Data\Shared\Translators\TranslatorData;
 use LaravelLang\Config\Facades\Config;
 use LaravelLang\LocaleList\Locale;
 use LaravelLang\Translator\Contracts\Translator;
-use LaravelLang\Translator\Integrations\Deepl;
-use LaravelLang\Translator\Integrations\Google;
-use LaravelLang\Translator\Integrations\Yandex;
+use RuntimeException;
 
+/**
+ * @method array|string|int|float|bool|null viaDeepl(iterable|string $text, Locale|string $to, Locale|string|null $from = null)
+ * @method array|string|int|float|bool|null viaGoogle(iterable|string $text, Locale|string $to, Locale|string|null $from = null)
+ * @method array|string|int|float|bool|null viaYandex(iterable|string $text, Locale|string $to, Locale|string|null $from = null)
+ */
 class Translate
 {
-    public function text(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
-    {
+    public function text(
+        iterable|string|int|float|bool|null $text,
+        Locale|string $to,
+        Locale|string|null $from = null
+    ): array|string|int|float|bool|null {
         foreach ($this->translators() as $service) {
             if ($translated = $this->translate($service->translator, $text, $to, $from)) {
                 return $translated;
@@ -25,36 +32,32 @@ class Translate
         return $text;
     }
 
-    public function viaDeepl(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
+    public function __call(string $name, array $arguments): array|string|int|float|bool|null
     {
-        return $this->via(Deepl::class, $text, $to, $from);
-    }
+        if (Str::startsWith($name, 'via')) {
+            $provider = Str::of($name)->substr(3)->lower()->toString();
 
-    public function viaGoogle(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
-    {
-        return $this->via(Google::class, $text, $to, $from);
-    }
+            return $this->via($this->translators()[$provider]->translator, ...$arguments);
+        }
 
-    public function viaYandex(iterable|string $text, Locale|string $to, Locale|string|null $from = null): array|string
-    {
-        return $this->via(Yandex::class, $text, $to, $from);
+        throw new RuntimeException("Undefined method called `$name`.");
     }
 
     protected function via(
         string $translator,
-        iterable|string $text,
+        iterable|string|int|float|bool|null $text,
         Locale|string $to,
-        Locale|string|null $from
-    ): array|string {
+        Locale|string|null $from = null
+    ): array|string|int|float|bool|null {
         return $this->translate($translator, $text, $to, $from) ?: $text;
     }
 
     protected function translate(
         string $translator,
-        iterable|string $text,
+        iterable|string|int|float|bool|null $text,
         Locale|string $to,
-        Locale|string|null $from
-    ): array|string|null {
+        Locale|string|null $from = null
+    ): array|string|int|float|bool|null {
         $translator = $this->initialize($translator);
 
         if ($translator->can($to)) {
