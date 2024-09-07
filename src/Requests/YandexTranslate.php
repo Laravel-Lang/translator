@@ -18,7 +18,8 @@ class YandexTranslate
     public function __construct(
         protected string $key,
         protected string $folder,
-    ) {}
+    ) {
+    }
 
     public function translate(iterable|string $text, Locale|string $to, Locale|string|null $from): array
     {
