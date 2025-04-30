@@ -23,16 +23,16 @@
         "deeplcom/deepl-php": "^1.7",
         "dragon-code/support": "^6.13",
         "guzzlehttp/guzzle": "^7.8",
-        "illuminate/config": "^10.0 || ^11.0",
-        "illuminate/http": "^10.0 || ^11.0",
-        "illuminate/support": "^10.0 || ^11.0",
+        "illuminate/config": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/http": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0",
         "laravel-lang/config": "^1.7",
         "laravel-lang/locale-list": "^1.4",
         "stichoza/google-translate-php": "^5.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^8.0 || ^9.0",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
         "pestphp/pest": "^2.34",
         "symfony/var-dumper": "^6.0 || ^7.0"
     },
