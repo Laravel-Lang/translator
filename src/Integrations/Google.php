@@ -147,8 +147,7 @@ class Google extends Integration
 
     public function __construct(
         protected GoogleTranslate $translator,
-    ) {
-    }
+    ) {}
 
     protected function request(array|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
