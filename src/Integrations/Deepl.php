@@ -151,8 +151,7 @@ class Deepl extends Integration
 
     public function __construct(
         protected DeeplTranslate $translator
-    ) {
-    }
+    ) {}
 
     protected function request(array|string $text, Locale|string $to, Locale|string|null $from): Collection
     {
