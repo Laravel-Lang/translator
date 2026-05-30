@@ -25,9 +25,7 @@ class ServiceProvider extends BaseServiceProvider
         ));
     }
 
-    /**
-     * @return array<TranslatorData>
-     */
+    /** @return array<TranslatorData> */
     protected function translators(): array
     {
         return Config::shared()->translators->channels->all;

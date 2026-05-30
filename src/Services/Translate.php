@@ -67,9 +67,7 @@ class Translate
         return null;
     }
 
-    /**
-     * @return array<TranslatorData>
-     */
+    /** @return array<TranslatorData> */
     protected function translators(): array
     {
         return Config::shared()->translators->channels->enabled;
